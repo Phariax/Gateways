@@ -57,7 +57,7 @@ function Player:Jump(coll)
     local coll = coll
 
     if coll > 1 then
-        addCentralForce(self.object, {0,0,1000},"local")
+        addCentralForce(self.object, {0,0,2500},"local")
     end
 end
 

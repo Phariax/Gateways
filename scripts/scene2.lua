@@ -8,8 +8,6 @@ dofile("sensor.lua")
 local Player = Player:new(getObject("Player01"))
 local Feet   = Sensor:new(getObject("Feet01"))
 
-
-
 --***************************--
 ----Keyhit functionality-------
 -------------------------------
@@ -67,9 +65,9 @@ function onSceneUpdate()
     --Jump+Hitkey workaround
     if isKeyPressed("SPACE") and (prevJumpKeyHit == "released") then
         Player:Jump(coll)
-        currKeyHit = "pressed"
+        currJumpKeyHit = "pressed"
     elseif onKeyUp("SPACE") then
-        currKeyHit = "released"
+        currJumpKeyHit = "released"
     end
 
     --Aiming, and turn around if needed. Has to be changed later.

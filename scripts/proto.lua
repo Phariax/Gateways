@@ -22,7 +22,9 @@ local jumpKeyState = {"pressed","released"}
 --The player entity 
 Player = getObject("Player")
 setLinearFactor(Player,{1,0,1})
-setAngularFactor(Player,{1,1,1})
+setAngularFactor(Player)
+angFac = getAngularFactor(Player)
+
 local playerPos = nil
 local playerRot = nil
 local direction = {"LEFT", "RIGHT"}
@@ -56,7 +58,7 @@ local gravityFlipper = "G"
 function onSceneUpdate()
     --print(width)
     --print(mx)
-    
+    print("the angfac is " ..tostring(angFac))
     coll = getNumCollisions(Feet)
 
     --Jumping
@@ -65,7 +67,7 @@ function onSceneUpdate()
     direction = playerRot[3] 
     jumpAllowed = prevJumpAllowed
 
-    print(playerPos[1])
+    --print(playerPos[1])
 
     if isKeyPressed(jumpKey) == true then
         jumpKeyState = "pressed"
@@ -76,10 +78,10 @@ function onSceneUpdate()
 
     if playerRot[3] == 0 then
         direction = "RIGHT"
-        print(direction)
+       -- print(direction)
     elseif playerRot[3] == 180 then
         direction = "LEFT"
-        print(direction)
+        --print(direction)
     end
 
 
@@ -222,8 +224,10 @@ function onSceneUpdate()
     --]]
 
 
-    print(playerRot[3])
+    --print(playerRot[3])
     prevJumpAllowed = jumpAllowed
     prevHeight = currHeight
+
+    rotate(Player, {0,0,1},10)
 end
 

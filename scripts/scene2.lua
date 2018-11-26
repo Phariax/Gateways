@@ -7,10 +7,12 @@ dofile("sensor.lua")
 -------------------------------
 local Player = Player:new(getObject("Player01"))
 local Feet   = Sensor:new(getObject("Feet01"))
+local DevCube02 = getObject("DevCube02")
+local DevCube01 = getObject("DevCube01")
 
---***************************--
+--===========================--
 ----Keyhit functionality-------
--------------------------------
+--===========================--
 local currJumpKeyHit  = "released"
 local prevJumpKeyHit  = "released"
 
@@ -30,8 +32,9 @@ local prevGravKeyHit = "released"
 --***************************--
 ----Player related setups------
 -------------------------------
-
+Player:AngularFactorOn()
 --The main game loop. Ticks every frame
+
 function onSceneUpdate()
 
     
@@ -54,6 +57,10 @@ function onSceneUpdate()
         currGravKeyHit = "released"
     end
  
+    if isKeyPressed("R") then
+        rotate(DevCube01,{0,0,1}, 10)
+    end
+
     --Moving to the left
     if isKeyPressed("A") then
         Player:MoveLeft(currGravDown)
@@ -62,6 +69,7 @@ function onSceneUpdate()
     if isKeyPressed("D") then
         Player:MoveRight(currGravDown)
     end
+
     --Jump+Hitkey workaround
     if isKeyPressed("SPACE") and (prevJumpKeyHit == "released") then
         Player:Jump(coll)
@@ -82,5 +90,6 @@ function onSceneUpdate()
     prevGravKeyHit = currGravKeyHit
     prevJumpKeyHit = currJumpKeyHit
 
+    Player:Rotate()
 end
 
